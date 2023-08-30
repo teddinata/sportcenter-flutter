@@ -241,6 +241,10 @@ class HomePage extends StatelessWidget {
             ProductTile(),
             ProductTile(),
             ProductTile(),
+            // margin
+            SizedBox(
+              height: 60,
+            ),
           ],
         ),
       );
