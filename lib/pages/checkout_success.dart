@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sportcenter/theme.dart';
 
-import '../widgets/cart_card.dart';
-
-class CartPage extends StatelessWidget {
-  const CartPage({super.key});
+class CheckoutSuccessPage extends StatelessWidget {
+  const CheckoutSuccessPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +11,7 @@ class CartPage extends StatelessWidget {
         backgroundColor: backgroundColor1,
         centerTitle: true,
         title: Text(
-          'Your Cart',
+          'Checkout Success',
           style: primaryTextStyle.copyWith(
             fontSize: 18,
             fontWeight: semiBold,
@@ -24,7 +22,7 @@ class CartPage extends StatelessWidget {
       );
     }
 
-    Widget emptyCart() {
+    Widget success() {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +35,7 @@ class CartPage extends StatelessWidget {
               height: 20,
             ),
             Text(
-              'Opss! Your cart is empty',
+              'You made a transaction',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: medium,
@@ -47,14 +45,15 @@ class CartPage extends StatelessWidget {
               height: 12,
             ),
             Text(
-              'Let\'s find your favorite shoes',
+              'Stay at home while we\nprepare your dream shoes',
               style: secondaryTextStyle,
+              textAlign: TextAlign.center,
             ),
             SizedBox(
               height: 20,
             ),
             Container(
-              width: 154,
+              width: 196,
               height: 44,
               child: TextButton(
                 onPressed: () {
@@ -72,7 +71,37 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Explore Store',
+                  'Order Other Shoes',
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: medium,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 196,
+              height: 44,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/home', (route) => false);
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 24,
+                  ),
+                  backgroundColor: Color(0xff39374B),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Text(
+                  'View My Order',
                   style: primaryTextStyle.copyWith(
                     fontSize: 16,
                     fontWeight: medium,
@@ -85,104 +114,10 @@ class CartPage extends StatelessWidget {
       );
     }
 
-    Widget content() {
-      return ListView(
-        padding: EdgeInsets.symmetric(
-          horizontal: defaultMargin,
-        ),
-        children: [
-          CartCard(),
-        ],
-      );
-    }
-
-    Widget CustomBottomNav() {
-      return Container(
-        height: 180,
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: defaultMargin,
-              ),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Subtotal',
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    '\$287,96',
-                    style: priceTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Divider(
-              thickness: 0.5,
-              color: subtitleColor,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              height: 50,
-              margin: EdgeInsets.symmetric(
-                horizontal: defaultMargin,
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/checkout');
-                },
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                  ),
-                  backgroundColor: primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Continue to Checkout',
-                      style: primaryTextStyle.copyWith(
-                        fontSize: 16,
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                    // Spacer(),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: primaryTextColor,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
     return Scaffold(
       backgroundColor: backgroundColor3,
       appBar: header(),
-      body: content(),
-      bottomNavigationBar: CustomBottomNav(),
+      body: success(),
     );
   }
 }
