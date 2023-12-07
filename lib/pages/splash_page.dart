@@ -14,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer.periodic(
-      Duration(milliseconds: 700), // adjust the interval as needed
+      Duration(milliseconds: 500), // adjust the interval as needed
       (Timer timer) {
         setState(() {
           final int percentage =

@@ -115,11 +115,21 @@ class ProfilePage extends StatelessWidget {
                   'Edit Profile',
                 ),
               ),
-              menuItem(
-                'Your Orders',
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/my-order');
+                },
+                child: menuItem(
+                  'Your Orders',
+                ),
               ),
-              menuItem(
-                'Help',
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/help');
+                },
+                child: menuItem(
+                  'Help',
+                ),
               ),
               SizedBox(
                 height: 30,
@@ -131,14 +141,29 @@ class ProfilePage extends StatelessWidget {
                   fontWeight: semiBold,
                 ),
               ),
-              menuItem(
-                'Privacy & Policy',
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/privacy-policy');
+                },
+                child: menuItem(
+                  'Privacy & Policy',
+                ),
               ),
-              menuItem(
-                'Term of Service',
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/term-of-service');
+                },
+                child: menuItem(
+                  'Term of Service',
+                ),
               ),
-              menuItem(
-                'Rate App',
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/rate-app');
+                },
+                child: menuItem(
+                  'Rate App',
+                ),
               ),
             ],
           ),
