@@ -105,10 +105,18 @@ class OrderPage extends StatelessWidget {
                                       fontWeight: medium,
                                     ),
                                   ),
+                                  Text(
+                                    '09 Dec 2023 00:10',
+                                    style: secondaryTextStyle.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: light,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 Text(
                                   '1 Items ',
@@ -116,15 +124,35 @@ class OrderPage extends StatelessWidget {
                                     fontSize: 12,
                                   ),
                                 ),
+                                SizedBox(height: 4),
+                                // Badge for Shipment Status
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors
+                                        .red, // You can customize the color based on the status
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
+                                    'Pending',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ],
                         ),
-                        // NOTE: ORDER ITEM
                       ],
                     ),
                   ),
                 ),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -157,6 +185,7 @@ class OrderPage extends StatelessWidget {
                               ),
                             ),
                           ),
+                          // BADGE : Status order
                         ),
                         Expanded(
                           child: Column(
@@ -172,15 +201,44 @@ class OrderPage extends StatelessWidget {
                                   fontWeight: medium,
                                 ),
                               ),
+                              Text(
+                                '09 Dec 2023 00:10',
+                                style: secondaryTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: light,
+                                ),
+                              ),
                             ],
                           ),
                         ),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
                               '1 Items ',
                               style: secondaryTextStyle.copyWith(
                                 fontSize: 12,
+                              ),
+                            ),
+
+                            SizedBox(height: 4),
+                            // Badge for Shipment Status
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors
+                                    .green, // You can customize the color based on the status
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'Shipped',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           ],
@@ -192,7 +250,6 @@ class OrderPage extends StatelessWidget {
               ],
             ),
           ),
-          // NOTE: LIST OF ORDER
         ],
       );
     }

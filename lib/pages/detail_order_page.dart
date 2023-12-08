@@ -50,10 +50,17 @@ class OrderDetailPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Product Details',
+              'Order Details',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: medium,
+              ),
+            ),
+            // INVOICE CODE
+            Text(
+              'INVOICE: #ADIDASX19',
+              style: priceTextStyle.copyWith(
+                fontSize: 18,
               ),
             ),
             SizedBox(height: 16),
@@ -109,6 +116,22 @@ class OrderDetailPage extends StatelessWidget {
                 ),
                 Text(
                   '2 Items',
+                  style: primaryTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Purchase Date',
+                  style: secondaryTextStyle,
+                ),
+                Text(
+                  '09 Dec, 2023, 10:00',
                   style: primaryTextStyle.copyWith(
                     fontWeight: medium,
                   ),
