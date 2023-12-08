@@ -14,20 +14,23 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer.periodic(
-      Duration(milliseconds: 500), // adjust the interval as needed
+      Duration(milliseconds: 600), // adjust the interval as needed
       (Timer timer) {
         setState(() {
           final int percentage =
               int.parse(_loadingText.split(' ')[1].replaceAll('%', ''));
           if (percentage == 0) {
-            _loadingText = 'Loading 30%';
-          } else if (percentage == 30) {
-            _loadingText = 'Loading 75%';
-          } else if (percentage == 75) {
+            _loadingText = 'Loading 23%';
+          } else if (percentage == 23) {
+            _loadingText = 'Loading 58%';
+          } else if (percentage == 58) {
+            _loadingText = 'Loading 77%';
+          } else if (percentage == 77) {
             _loadingText = 'Loading 100%';
           } else {
             timer.cancel();
-            Navigator.pushNamed(context, '/sign-in');
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/sign-in', (route) => false);
           }
         });
       },

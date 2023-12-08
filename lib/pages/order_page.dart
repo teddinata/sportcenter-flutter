@@ -41,32 +41,36 @@ class OrderPage extends StatelessWidget {
         ),
         children: [
           // NOTE: LIST OF ORDER
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => OrderDetailPage(),
-                ),
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.only(
-                top: defaultMargin,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Your Orders',
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: medium,
-                    ),
+          Container(
+            margin: EdgeInsets.only(
+              top: defaultMargin,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Your Orders',
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: medium,
                   ),
-                  // NOTE: ORDER LIST
-                  Container(
+                ),
+                // NOTE: ORDER LIST
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderDetailPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
                     margin: EdgeInsets.only(top: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: backgroundColor4,
+                    ),
                     child: Column(
                       children: [
                         // NOTE: ORDER ITEM
@@ -107,27 +111,9 @@ class OrderPage extends StatelessWidget {
                             Column(
                               children: [
                                 Text(
-                                  '1 Items',
+                                  '1 Items ',
                                   style: secondaryTextStyle.copyWith(
                                     fontSize: 12,
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => OrderDetailPage(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'Details',
-                                    style: primaryTextStyle.copyWith(
-                                      fontSize: 12,
-                                      fontWeight: medium,
-                                      color: primaryColor,
-                                    ),
                                   ),
                                 ),
                               ],
@@ -135,90 +121,75 @@ class OrderPage extends StatelessWidget {
                           ],
                         ),
                         // NOTE: ORDER ITEM
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OrderDetailPage(),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderDetailPage(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(top: 16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: backgroundColor4,
+                      shape: BoxShape.rectangle,
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          margin: EdgeInsets.only(
+                            right: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/shoes-product.png',
                               ),
-                            );
-                          },
-                          child: Container(
-                            margin: EdgeInsets.only(top: 16),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  margin: EdgeInsets.only(
-                                    right: 12,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                        'assets/shoes-product.png',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Nike Football',
-                                        style: primaryTextStyle,
-                                      ),
-                                      Text(
-                                        '\$103.15',
-                                        style: priceTextStyle.copyWith(
-                                          fontWeight: medium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      '1 Items',
-                                      style: secondaryTextStyle.copyWith(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                OrderDetailPage(),
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
-                                        'Details',
-                                        style: primaryTextStyle.copyWith(
-                                          fontSize: 12,
-                                          fontWeight: medium,
-                                          color: primaryColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
                             ),
                           ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Nike Football',
+                                style: primaryTextStyle,
+                              ),
+                              Text(
+                                '\$103.15',
+                                style: priceTextStyle.copyWith(
+                                  fontWeight: medium,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              '1 Items ',
+                              style: secondaryTextStyle.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           // NOTE: LIST OF ORDER
