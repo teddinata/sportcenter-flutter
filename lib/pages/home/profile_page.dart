@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sportcenter/theme.dart';
+
+import '../../models/user_model.dart';
+import '../../providers/auth_provider.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     Widget header() {
       return AppBar(
         backgroundColor: backgroundColor1,
@@ -17,10 +24,18 @@ class ProfilePage extends StatelessWidget {
             child: Row(
               children: [
                 ClipOval(
-                  child: Image.asset(
-                    'assets/img-profile.png',
-                    width: 64,
-                  ),
+                  // check if user.profilePhotoUrl is null
+                  // if null, use default image
+                  // if not null, use NetworkImage
+                  child: user.profilePhotoUrl != null
+                      ? Image.network(
+                          user.profilePhotoUrl!,
+                          width: 64,
+                        )
+                      : Image.network(
+                          'https://ui-avatars.com/api/?name=${user.name}',
+                          width: 64,
+                        ),
                 ),
                 SizedBox(
                   width: 16,
@@ -30,14 +45,14 @@ class ProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Hallo, Johnkowi',
+                        'Hallo, ${user.name}',
                         style: primaryTextStyle.copyWith(
                           fontSize: 24,
                           fontWeight: semiBold,
                         ),
                       ),
                       Text(
-                        '@johnkowi',
+                        '@${user.username}',
                         style: subtitleTextStyle.copyWith(
                           fontSize: 16,
                         ),

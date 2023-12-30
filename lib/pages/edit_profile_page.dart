@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sportcenter/theme.dart';
+
+import '../models/user_model.dart';
+import '../providers/auth_provider.dart';
 
 class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+
     PreferredSizeWidget header() {
       return AppBar(
         leading: IconButton(
@@ -53,7 +60,7 @@ class EditProfilePage extends StatelessWidget {
             ),
             TextFormField(
               style: primaryTextStyle,
-              initialValue: 'John Doe',
+              initialValue: '${user.name}',
               decoration: InputDecoration(
                 hintText: 'Your Name',
                 hintStyle: primaryTextStyle,
@@ -85,7 +92,7 @@ class EditProfilePage extends StatelessWidget {
             ),
             TextFormField(
               style: primaryTextStyle,
-              initialValue: '@JohnDoe',
+              initialValue: '${user.username}',
               decoration: InputDecoration(
                 hintText: 'Your Username',
                 hintStyle: primaryTextStyle,
@@ -117,7 +124,7 @@ class EditProfilePage extends StatelessWidget {
             ),
             TextFormField(
               style: primaryTextStyle,
-              initialValue: 'johndoe@gmail.com',
+              initialValue: '${user.email}',
               decoration: InputDecoration(
                 hintText: 'Your Email Address',
                 hintStyle: primaryTextStyle,
@@ -152,9 +159,15 @@ class EditProfilePage extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: AssetImage(
-                    'assets/img-profile.png',
-                  ),
+                  // check if user.profilePhotoUrl is null
+                  // if it's null, use NetworkImage with ui-avatars.com
+                  // else, use NetworkImage with user.profilePhotoUrl
+                  fit: BoxFit.fill,
+                  image: user.profilePhotoUrl != null
+                      ? NetworkImage(user.profilePhotoUrl!)
+                      : NetworkImage(
+                          'https://ui-avatars.com/api/?name=${user.name}',
+                        ),
                 ),
               ),
             ),

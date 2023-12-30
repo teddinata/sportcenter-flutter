@@ -1,9 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:sportcenter/theme.dart';
+import 'package:sportcenter/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:sportcenter/widgets/loading_button.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailOrUsernameController = TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+
+  bool isLoading = false;
+
+  final ValueNotifier<bool> _obscureText = ValueNotifier(true);
+
+  void _togglePasswordVisibility() {
+    _obscureText.value = !_obscureText.value;
+  }
+
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await authProvider.login(
+        emailOrUsername: emailOrUsernameController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushNamed(context, '/home');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: secondaryColor,
+            content: Text(
+              'Login Success',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Login Failed',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(top: 30),
@@ -39,7 +97,7 @@ class SignInPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Email Address',
+              'Email Address or Username',
               style: primaryTextStyle.copyWith(
                 fontSize: 16,
                 fontWeight: medium,
@@ -70,8 +128,9 @@ class SignInPage extends StatelessWidget {
                   Expanded(
                     child: TextFormField(
                       style: primaryTextStyle,
+                      controller: emailOrUsernameController,
                       decoration: InputDecoration.collapsed(
-                        hintText: 'Your Email Address',
+                        hintText: 'Your Email Address or Username',
                         hintStyle: secondaryTextStyle.copyWith(
                           fontSize: 12,
                           fontWeight: light,
@@ -125,13 +184,27 @@ class SignInPage extends StatelessWidget {
                   Expanded(
                     child: TextFormField(
                       style: primaryTextStyle,
-                      obscureText: true,
-                      decoration: InputDecoration.collapsed(
+                      controller: passwordController,
+                      obscureText: _obscureText.value,
+                      decoration: InputDecoration(
                         hintText: 'Your Password',
                         hintStyle: secondaryTextStyle.copyWith(
                           fontSize: 12,
                           fontWeight: light,
                         ),
+                        suffixIcon: IconButton(
+                          icon: ValueListenableBuilder(
+                            valueListenable: _obscureText,
+                            builder: (context, value, child) {
+                              return Icon(
+                                value ? Icons.visibility_off : Icons.visibility,
+                                color: Theme.of(context).primaryColorDark,
+                              );
+                            },
+                          ),
+                          onPressed: _togglePasswordVisibility,
+                        ),
+                        border: InputBorder.none,
                       ),
                     ),
                   )
@@ -150,9 +223,7 @@ class SignInPage extends StatelessWidget {
         width: double.infinity,
         margin: EdgeInsets.only(top: 30),
         child: TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/home');
-          },
+          onPressed: handleSignIn,
           style: TextButton.styleFrom(
             backgroundColor: primaryColor,
             shape: RoundedRectangleBorder(
@@ -214,7 +285,7 @@ class SignInPage extends StatelessWidget {
               header(),
               emailInput(),
               passwordInput(),
-              signInButton(),
+              isLoading ? LoadingButton() : signInButton(),
               Spacer(),
               footer(),
             ],
